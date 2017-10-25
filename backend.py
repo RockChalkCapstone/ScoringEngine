@@ -20,12 +20,12 @@ def check_user_exists(userName):
   try:
     # Searches /etc/passwd for entry with username userName
     pwd.getpwnam(userName)
-    print("User '%s' exists" % (userName))
+    print(0)
     return 0
   except KeyError:
-    print("User '%s' does not exist" % (userName))
+    print(1)
     return 1
   
 
 
-check_user_exists('test')
+

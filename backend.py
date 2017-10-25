@@ -19,7 +19,7 @@ def check_user_exists(userName: str) -> bool:
     """
     try:
     # Searches /etc/passwd for entry with username userName
-        pwd.getpwnam(userName)
+        pwd.getpwnam(str(userName)) # Forces input to be a string
         print(True)
         return True
     except KeyError:

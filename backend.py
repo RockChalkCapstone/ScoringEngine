@@ -25,3 +25,4 @@ def check_user_exists(userName: str) -> bool:
     except KeyError:
         print(False)
         return False
+

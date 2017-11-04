@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-def check_sudo_user_password():
+def check_sudo_user_password() -> bool:
   """
   Function checks if sudo users are set to require passwords
   
@@ -20,16 +20,16 @@ def check_sudo_user_password():
       
   """
   # String to search
-  str = 'NOPASSWD' 
+  searchStr = 'NOPASSWD' 
   
   # Storing open file object for the /etc/sudoers file
   sudoFile = open("/etc/sudoers", 'r')
   
   # If str exists in sudoFile, return True
   # else return false
-  if str in sudoFile.read():
-    print('true')
+  if searchStr in sudoFile.read():
     sudoFile.close()
+    print('true')
     return True
   else:
     sudoFile.close()
@@ -37,7 +37,6 @@ def check_sudo_user_password():
     return False
 
 
-  
     
     
     

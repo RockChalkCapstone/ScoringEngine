@@ -50,25 +50,37 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
     # Will hold translated key/value pairs from the 'lines' list
     valueDict = {}
     
-    
+    # Filtering lines in /etc/login.defs to only save lines with the 
+    # search values
     for line in loginFile:
         if (
                 ('PASS_MAX_DAYS' in line or
                 'PASS_CHANGE_TRIES' in line or
                 'PASS_MIN_LEN' in line or
                 'PASS_MAX_LEN' in line) and
+                # Prevents commented lines from being included
                 '#' not in line
             ):
             
+            # Saves line to 'lines' array
             lines.append(line)
+    
+    # Closes file '/etc/login.defs'
     loginFile.close()
             
+    '''
+    Translates lines[] into a dictionary
     
+    Example lines[] state is ['PASS_MAX_DAYS\t9999\n']
+    
+    Translated sample: {'PASS_MAX_DAYS': '9999'}
+    '''
     for entry in lines:
         key = entry.split('\t')[0]
         value = re.sub("\D", "", entry.split('\t')[1])
         valueDict[key] = value
     
+    # Testing print.  Remove.
     print(valueDict)
         
                 

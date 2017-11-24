@@ -2,7 +2,7 @@
 
 import re
         
-def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=None) -> bool:
+def check_password_policy(changeTries: int=None, maxDays: int=None, maxLen: int=None, minLen: int=None) -> bool:
     """
     Checks if passwords policy is enforced
     
@@ -41,6 +41,7 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
        
     """
       
+    # Stores arguments in a dictionary form for comparison
     argDict = {
         'PASS_MAX_DAYS'     : maxDays,
         'PASS_CHANGE_TRIES' : changeTries,
@@ -48,6 +49,7 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
         'PASS_MAX_LEN'      : maxLen
     }
     
+    # Stores all non-None arguments
     userArgDict = {}
     for key in argDict:
         if argDict[key] != None:
@@ -91,6 +93,8 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
     '''
     for entry in lines:
         key = entry.split('\t')[0]
+        
+        # Ensures that the dict value is only numeric characters
         value = re.sub("\D", "", entry.split('\t')[1])
         fileDict[key] = int(value) # Must cast as int to compare properly
     
@@ -101,4 +105,3 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
     else:
         return False
     
-

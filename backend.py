@@ -1,6 +1,5 @@
 #!/usr/bin/python3.5
 
-import os
 import re
         
 def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=None) -> bool:
@@ -41,14 +40,29 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
         
        
     """
-       
+      
+    argDict = {
+        'PASS_MAX_DAYS'     : maxDays,
+        'PASS_CHANGE_TRIES' : changeTries,
+        'PASS_MIN_LEN'      : minLen,
+        'PASS_MAX_LEN'      : maxLen
+    }
+    
+    userArgDict = {}
+    for key in argDict:
+        if argDict[key] != None:
+            userArgDict[key] = argDict[key]
+    
+    
+            
+
     loginFile = open("/etc/login.defs", 'r')
     
     # List of lines containing values we are checking
     lines = []
     
     # Will hold translated key/value pairs from the 'lines' list
-    valueDict = {}
+    fileDict = {}
     
     # Filtering lines in /etc/login.defs to only save lines with the 
     # search values
@@ -78,16 +92,18 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
     for entry in lines:
         key = entry.split('\t')[0]
         value = re.sub("\D", "", entry.split('\t')[1])
-        valueDict[key] = value
+        fileDict[key] = int(value)
+        
     
     # Testing print.  Remove.
-    print(valueDict)
-        
-                
-        
+    print(userArgDict)
+    print(fileDict)
     
-    # if 'PASS_MAX_DAYS' in loginFile.read():
-    #     loginFile.close()
-    #     print('True')
+    if userArgDict == fileDict:
+        print('True')
+    else:
+        print('False')
+    # print(fileDict['PASS_MIN_LEN'])
+    
         
-check_password_policy()
+check_password_policy(maxDays=99999)

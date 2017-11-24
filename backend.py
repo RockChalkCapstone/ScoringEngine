@@ -92,18 +92,13 @@ def check_password_policy(changeTries=None, maxDays=None, maxLen=None, minLen=No
     for entry in lines:
         key = entry.split('\t')[0]
         value = re.sub("\D", "", entry.split('\t')[1])
-        fileDict[key] = int(value)
-        
+        fileDict[key] = int(value) # Must cast as int to compare properly
     
-    # Testing print.  Remove.
-    print(userArgDict)
-    print(fileDict)
-    
+    # Compares the two dictionaries to see if they match
+    # If they match, return True.  Else return False.
     if userArgDict == fileDict:
-        print('True')
+        return True
     else:
-        print('False')
-    # print(fileDict['PASS_MIN_LEN'])
+        return False
     
-        
-check_password_policy(maxDays=99999)
+

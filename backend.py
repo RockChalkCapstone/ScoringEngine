@@ -1,7 +1,38 @@
 #!/usr/bin/python3.5
 
 import re
-        
+import pwd
+
+#Description: Checks if user exists on any unix machine.
+#Preconditions: userName is in /etc/passwd.
+def check_user_exists(userName: str) -> bool:
+    """
+    Checks if user exists on the machine
+
+    Parameters
+    ----------
+    userName : str
+        Username of user being checked for existence
+
+    Returns
+    -------
+    bool
+        True if user exists
+        False if user does not exist
+
+    """
+    try:
+    # Searches /etc/passwd for entry with username userName
+        pwd.getpwnam(str(userName)) # Forces input to be a string
+        print(True)
+        return True
+    except KeyError:
+        print(False)
+        return False
+
+
+#Description: Checks if specific password policy is set based off input parameters.
+#Preconditions: Password policy is enforced in /etc/login.defs
 def check_password_policy(changeTries: int=None, maxDays: int=None, maxLen: int=None, minLen: int=None) -> bool:
     """
     Checks if passwords policy is enforced
@@ -104,4 +135,3 @@ def check_password_policy(changeTries: int=None, maxDays: int=None, maxLen: int=
         return True
     else:
         return False
-    

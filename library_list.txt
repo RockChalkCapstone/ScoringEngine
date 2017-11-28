@@ -6,3 +6,8 @@ Module 're'
 This module provides regular expression matching operations similar to those 
 found in Perl.  Used primarily in this project for string manipulation.
 https://docs.python.org/3/library/re.html
+
+Module 'sys'
+This module provides access to some variables used or maintained by the interpreter and
+to functions that interact strongly with the interpreter. It is always available.
+https://docs.python.org/3/library/sys.html

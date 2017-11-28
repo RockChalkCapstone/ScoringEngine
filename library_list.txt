@@ -1,0 +1,6 @@
+From backend.py line 3:
+
+Module 're'
+This module provides regular expression matching operations similar to those 
+found in Perl.  Used primarily in this project for string manipulation.
+https://docs.python.org/3/library/re.html

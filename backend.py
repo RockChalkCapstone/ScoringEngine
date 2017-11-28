@@ -2,6 +2,21 @@
 
 import re
 import pwd
+from spwd import getspnam
+from os import getuid
+
+#Description: Currently, returns encrypted passwd. Goal is to return whether user has a passwd.
+#Preconditions: Need root privilege to run this function.
+def check_for_user_password(userName):
+
+	#Check for root UID.
+	if(getuid() != 0):
+		print("You must be root to run this utility.")
+		exit(1)
+
+	encrypted_pwd = getspnam(userName)[1]
+	print("Encrypted password: " + encrypted_pwd)
+    
 
 #Description: Checks if user exists on any unix machine.
 #Preconditions: userName is in /etc/passwd.

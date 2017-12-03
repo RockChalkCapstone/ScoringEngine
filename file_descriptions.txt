@@ -1,0 +1,8 @@
+backend.py:
+This file contains all the Python code to be ran on the Linux system for the scoring engine.  
+
+library_list.txt:
+This file is a list of all Python modules used and links to their documentation.
+
+test_backend.py:
+Unit testing suite to programatically test backend.py.

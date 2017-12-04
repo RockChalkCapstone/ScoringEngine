@@ -162,16 +162,16 @@ def check_sudo_user_password() -> bool:
   # Storing open file object for the /etc/sudoers file
   sudoFile = open("/etc/sudoers", 'r')
   
-  # If str exists in sudoFile, return True
-  # else return false
+  # If str exists in sudoFile, return False
+  # else return True
   if searchStr in sudoFile.read():
-    sudoFile.close()
-    print('true')
-    return True
-  else:
     sudoFile.close()
     print('false')
     return False
+  else:
+    sudoFile.close()
+    print('true')
+    return True
 
 
     

@@ -166,12 +166,12 @@ def check_sudo_user_password() -> bool:
   # else return false
   if searchStr in sudoFile.read():
     sudoFile.close()
-    print('true')
-    return True
-  else:
-    sudoFile.close()
     print('false')
     return False
+  else:
+    sudoFile.close()
+    print('true')
+    return True
 
 
     

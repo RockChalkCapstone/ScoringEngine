@@ -4,7 +4,7 @@ import backend
 from sys import argv
 
 def main():
-	#Disply how to run script.
+	#Display how to run script.
 	if(len(argv) <= 1):
 		print("----------------------------------------------------------------------")
 		print("-                         Overview:			     	    -")

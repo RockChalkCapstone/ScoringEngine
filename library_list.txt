@@ -15,3 +15,8 @@ Module 'spwd'
 This module provides access to the Unix shadow password database. It is available on various Unix versions.
 You must have enough privileges to access the shadow password database (this usually means you have to be root).
 https://docs.python.org/3.5/library/spwd.html
+
+Module 'getpass'
+This module provides access to two functions, getpass() and getuser(). It is avaiable in Unix and Windows.
+Currently, the scoring engine is utilizing getuser() in the test file to return the "login name".
+https://docs.python.org/3.1/library/getpass.html

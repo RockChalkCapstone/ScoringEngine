@@ -11,3 +11,12 @@ Module 'sys'
 This module provides access to some variables used or maintained by the interpreter and
 to functions that interact strongly with the interpreter. It is always available.
 https://docs.python.org/3/library/sys.html
+
+Module 'os'
+This module provides a portable way of using operating system dependent functionality.
+https://docs.python.org/3/library/os.html
+
+Module 'spwd'
+This module provides access to the Unix shadow password database. It is available on various Unix versions.
+You must have enough privileges to access the shadow password database (this usually means you have to be root).
+https://docs.python.org/3.5/library/spwd.html

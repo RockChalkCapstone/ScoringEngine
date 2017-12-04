@@ -2,9 +2,48 @@
 
 import re
 import pwd
+from spwd import getspnam
+from os import getuid
 
-#Description: Checks if user exists on any unix machine.
-#Preconditions: userName is in /etc/passwd.
+def check_user_password_set(userName: str) -> bool:
+	"""
+	Checks if user has a set password.
+
+	Parameters
+	----------
+	userName : str
+		Username of user being checked for password
+
+	Returns
+	-------
+	bool
+		True if user has a password.
+		False if user does not have a password.
+
+	"""
+
+	#Check for root UID.
+	if(getuid() != 0):
+		print("You must have root privileges to run this utility.")
+		exit(1)
+
+	encrypted_pwd = getspnam(userName)[1]
+
+	if(encrypted_pwd == ""):
+		#No password.
+		return False
+	elif(encrypted_pwd == "*"):
+		#Password never established.
+		return False
+	elif(encrypted_pwd == "!"):
+		#Account locked.
+		return False
+	elif(encrypted_pwd == "!!"):
+		#Account has been created but no password is set.
+		return False
+	else:
+		return True
+
 def check_user_exists(userName: str) -> bool:
     """
     Checks if user exists on the machine
@@ -135,3 +174,45 @@ def check_password_policy(changeTries: int=None, maxDays: int=None, maxLen: int=
         return True
     else:
         return False
+
+
+def check_sudo_user_password() -> bool:
+  """
+  Function checks if sudo users are set to require passwords
+  
+  Searches the /etc/sudoers file for the entry 'NOPASSWD'
+  If this setting exists in the file, then that means a sudo user 
+  will be able to execute sudo commands without having to use a password
+  
+  Parameters
+  ----------
+  None
+     
+  Returns
+  -------
+  bool
+    True if sudo users must use passwords to execute sudo commands
+    False if sudo users do not have to use passwords to execute sudo commands
+      
+  """
+  # String to search
+  searchStr = 'NOPASSWD' 
+  
+  # Storing open file object for the /etc/sudoers file
+  sudoFile = open("/etc/sudoers", 'r')
+  
+  # If str exists in sudoFile, return False
+  # else return True
+  if searchStr in sudoFile.read():
+    sudoFile.close()
+    print('false')
+    return False
+  else:
+    sudoFile.close()
+    print('true')
+    return True
+
+
+    
+    
+    

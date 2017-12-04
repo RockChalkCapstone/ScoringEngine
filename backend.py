@@ -22,27 +22,30 @@ def check_user_password_set(userName: str) -> bool:
 
 	"""
 
-	#Check for root UID.
-	if(getuid() != 0):
-		print("You must have root privileges to run this utility.")
-		exit(1)
+	if(type(userName) is str):
+		#Check for root UID.
+		if(getuid() != 0):
+			print("You must have root privileges to run this utility.")
+			exit(1)
 
-	encrypted_pwd = getspnam(userName)[1]
+		encrypted_pwd = getspnam(userName)[1]
 
-	if(encrypted_pwd == ""):
-		#No password.
-		return False
-	elif(encrypted_pwd == "*"):
-		#Password never established.
-		return False
-	elif(encrypted_pwd == "!"):
-		#Account locked.
-		return False
-	elif(encrypted_pwd == "!!"):
-		#Account has been created but no password is set.
-		return False
+		if(encrypted_pwd == ""):
+			#No password.
+			return False
+		elif(encrypted_pwd == "*"):
+			#Password never established.
+			return False
+		elif(encrypted_pwd == "!"):
+			#Account locked.
+			return False
+		elif(encrypted_pwd == "!!"):
+			#Account has been created but no password is set.
+			return False
+		else:
+			return True
 	else:
-		return True
+		return False
 
 def check_user_exists(userName: str) -> bool:
     """

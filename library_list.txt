@@ -6,3 +6,12 @@ Module 're'
 This module provides regular expression matching operations similar to those 
 found in Perl.  Used primarily in this project for string manipulation.
 https://docs.python.org/3/library/re.html
+
+Module 'os'
+This module provides a portable way of using operating system dependent functionality.
+https://docs.python.org/3/library/os.html
+
+Module 'spwd'
+This module provides access to the Unix shadow password database. It is available on various Unix versions.
+You must have enough privileges to access the shadow password database (this usually means you have to be root).
+https://docs.python.org/3.5/library/spwd.html

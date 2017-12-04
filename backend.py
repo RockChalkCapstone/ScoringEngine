@@ -2,9 +2,48 @@
 
 import re
 import pwd
+from spwd import getspnam
+from os import getuid
 
-#Description: Checks if user exists on any unix machine.
-#Preconditions: userName is in /etc/passwd.
+def check_user_password_set(userName: str) -> bool:
+	"""
+	Checks if user has a set password.
+
+	Parameters
+	----------
+	userName : str
+		Username of user being checked for password
+
+	Returns
+	-------
+	bool
+		True if user has a password.
+		False if user does not have a password.
+
+	"""
+
+	#Check for root UID.
+	if(getuid() != 0):
+		print("You must have root privileges to run this utility.")
+		exit(1)
+
+	encrypted_pwd = getspnam(userName)[1]
+
+	if(encrypted_pwd == ""):
+		#No password.
+		return False
+	elif(encrypted_pwd == "*"):
+		#Password never established.
+		return False
+	elif(encrypted_pwd == "!"):
+		#Account locked.
+		return False
+	elif(encrypted_pwd == "!!"):
+		#Account has been created but no password is set.
+		return False
+	else:
+		return True
+
 def check_user_exists(userName: str) -> bool:
     """
     Checks if user exists on the machine
